@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.testtalks.robotframework</groupId>
+  <artifactId>Robotframeworkexample</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>Robotframeworkexample</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <robot.browser>chrome</robot.browser>    <!-- Browser used in tests -->
+    <robot.tag></robot.tag>                  <!-- Tagging the test cases  -->
+    <robot.remote_url></robot.remote_url>    <!-- Selenium GRID hub address -->
+    <robot.url>https://www.op.fi</robot.url> <!-- SUT address -->
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.github.markusbernhardt</groupId>
+      <artifactId>robotframework-selenium2library-java</artifactId>
+      <version>1.4.0.8</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/junit/junit -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.robotframework</groupId>
+        <artifactId>robotframework-maven-plugin</artifactId>
+        <version>1.4.5</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <testCasesDirectory>${project.basedir}/src/main/resources</testCasesDirectory>
+          <includes_cli>${robot.tag}</includes_cli>
+          <variables>
+            <variable>BROWSER:${robot.browser}</variable>
+            <variable>REMOTE_URL:${robot.remote_url}</variable>
+            <variable>URL:${robot.url}</variable>
+            <variableFile>${project.basedir}/src/main/resources/exercise1/variables.yaml</variableFile>
+          </variables>
+          <libdoc/>
+          <testdoc/>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.robotframework</groupId>
+            <artifactId>robotframework</artifactId>
+            <version>2.9.2</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+</project>

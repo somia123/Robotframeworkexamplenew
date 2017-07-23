@@ -1,0 +1,35 @@
+*** Settings ***
+Library  Selenium2Library
+Variables   variables.yaml
+
+
+
+*** Variables ***
+${REMOTE_URL}
+${URL}  http://www.joecolantonio.com
+${BROWSER}  chrome
+
+
+*** Keywords ***
+
+User Opens a Browser and goes to address "${url}"
+    ${remote}=  Get Variable Value  ${REMOTE_URL}  None
+    Run Keyword If  '${remote}'==''  Open Browser  ${url}  ${BROWSER}    None
+    Run Keyword Unless  '${remote}'==''  Open Browser  ${url}  ${BROWSER}    None  ${REMOTE_URL}
+
+User types user id "${id}"
+  Set Selenium Speed  30s
+  Input Text  id=ck_firstNameField  ${id}
+
+//Read user id from excel "${path}"
+ //Open Excel ${path}
+ //${rowcounts} Get Row Count  Sheet1
+//for ${rowcount} in range ${rowcounts}+1
+ //{$id} Get Column Values	Sheet1 ${rowcount}
+ //User types user id  {$id}
+
+
+
+
+
+
